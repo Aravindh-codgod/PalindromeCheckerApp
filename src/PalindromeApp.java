@@ -1,27 +1,27 @@
-import java.util.Stack;
+import java.util.*;
 
 public class PalindromeApp {
     public static void main(String[] args) {
         System.out.println("Palindrome Checker App - Version 1.0");
 
-        String test3 = "noon";
-        System.out.println("UC5: Stack-based check for \"" + test3 + "\"");
-        System.out.println(isPalindromeStack(test3) ? "Palindrome" : "Not Palindrome");
+        String test4 = "radar";
+        System.out.println("UC6: Queue + Stack check for \"" + test4 + "\"");
+        System.out.println(isPalindromeQueueStack(test4) ? "Palindrome" : "Not Palindrome");
     }
 
-    public static boolean isPalindromeStack(String str) {
+    public static boolean isPalindromeQueueStack(String str) {
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
         for (char c : str.toCharArray()) {
+            queue.add(c);
             stack.push(c);
         }
-        String reversed = "";
-        while (!stack.isEmpty()) {
-            reversed += stack.pop();
+        while (!queue.isEmpty()) {
+            if (queue.remove() != stack.pop()) return false;
         }
-        return str.equals(reversed);
+        return true;
     }
 }
-
 
 
 
