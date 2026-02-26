@@ -1,23 +1,27 @@
+import java.util.Stack;
+
 public class PalindromeApp {
     public static void main(String[] args) {
         System.out.println("Palindrome Checker App - Version 1.0");
 
-        String test2 = "level";
-        System.out.println("UC4: Char array two-pointer check for \"" + test2 + "\"");
-        System.out.println(isPalindromeCharArray(test2) ? "Palindrome" : "Not Palindrome");
+        String test3 = "noon";
+        System.out.println("UC5: Stack-based check for \"" + test3 + "\"");
+        System.out.println(isPalindromeStack(test3) ? "Palindrome" : "Not Palindrome");
     }
 
-    public static boolean isPalindromeCharArray(String str) {
-        char[] arr = str.toCharArray();
-        int left = 0, right = arr.length - 1;
-        while (left < right) {
-            if (arr[left] != arr[right]) return false;
-            left++;
-            right--;
+    public static boolean isPalindromeStack(String str) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : str.toCharArray()) {
+            stack.push(c);
         }
-        return true;
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+        return str.equals(reversed);
     }
 }
+
 
 
 
