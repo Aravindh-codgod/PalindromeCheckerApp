@@ -2,27 +2,28 @@ import java.util.Scanner;
 
 /**
  * ==========================================================
- * MAIN CLASS - PalindromeApp
+ * MAIN CLASS - UseCase11PalindromeCheckerApp
  * ==========================================================
  *
- * Use Case 10: Normalized Palindrome Validation
+ * Use Case 11: Object-Oriented Palindrome Service
  *
  * Description:
- * This class validates a palindrome after preprocessing
- * the input string.
+ * This class demonstrates palindrome validation using
+ * object-oriented design.
  *
- * Normalization includes:
- * - Removing spaces and symbols
- * - Converting to lowercase
+ * The palindrome logic is encapsulated inside a
+ * PalindromeService class.
  *
- * Example:
- * "A man a plan a canal Panama"
+ * This improves:
+ * - Reusability
+ * - Readability
+ * - Separation of concerns
  */
 
-public class PalindromeApp {
+public class PalindromegiApp {
 
     /**
-     * Application entry point for UC10.
+     * Application entry point for UC11.
      */
     public static void main(String[] args) {
 
@@ -31,28 +32,50 @@ public class PalindromeApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Normalize string: remove spaces and symbols, convert to lowercase
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        // Create service object
+        PalindromeService service = new PalindromeService();
 
-        boolean isPalindrome = true;
+        boolean result = service.checkPalindrome(input);
 
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
-
-            // Compare symmetric characters
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if (isPalindrome) {
+        if (result) {
             System.out.println("The given string is a Palindrome.");
         } else {
             System.out.println("The given string is NOT a Palindrome.");
         }
 
         scanner.close();
+    }
+}
+
+/**
+ * Service class that contains palindrome logic.
+ */
+class PalindromeService {
+
+    /**
+     * Checks whether the input string is a palindrome.
+     *
+     * @param input Input string
+     * @return true if palindrome, false otherwise
+     */
+    public boolean checkPalindrome(String input) {
+
+        // Initialize pointers
+        int start = 0;
+        int end = input.length() - 1;
+
+        // Compare characters moving inward
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
     }
 }
 
